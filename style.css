@@ -1,0 +1,12 @@
+
+.header{
+    color: white;
+    margin: 0 auto;
+}
+
+.weatherStats{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+}

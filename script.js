@@ -6,7 +6,16 @@ $.ajax({
     method:"GET"
 }) 
   .then(function(response){
-      console.log(response)
+       // Log the queryURL
+      console.log(weatherUrl)
+    // Log the resulting object
+    console.log(response) 
 
+      $(".city").html("<h2>"+response.name + " Weather Details</h2>")
+      $(".temp").text("Temp: "+response.main.temp)
+      $(".humidity").text("Humidity: "+response.main.humidity)
+      $(".wind").text("Wind: " + response.wind.speed)
+
+      
       
   })
