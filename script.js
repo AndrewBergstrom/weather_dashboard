@@ -18,14 +18,25 @@ $.ajax({
 
         $(".city").html("<h2>" + response.name + " Weather Details</h2>");
         $(".temp").text("Temp (F): " + tempF.toFixed());
-        $(".tempC").html("Temp (C): "+ tempC.toFixed())
+        $(".tempC").html("Temp (C): " + tempC.toFixed())
         $(".humidity").text("Humidity: " + response.main.humidity);
         $(".wind").text("Wind: " + response.wind.speed);
 
+         var myLat = response.coord.lat;
+         var myLon = response.coord.lon;
+        getUVindex(myLat, myLon);
         
-
-
-
-
-
+  
     })
+
+    function getUVindex(lat, log){
+        $.ajax({
+            type: "GET",
+            url: `https://api.openweathermap.org/data/2.5/uvi?appid=${APIKey}&lat=${lat}&lon=${log}`,
+            dataType: "json",
+            success: function(data){
+                console.log("data from uv index: ", data);
+                $(".uvIndex").text(`UV index: ${data.value}`);
+            }
+        })
+    }
