@@ -12,6 +12,33 @@ var dayThree = $("#dayThree")
 var dayFour = $("#dayFour")
 var dayFive = $("#dayFive")
 
+
+
+// On click event listener for search button
+$("#citySearch").on("click", function (event) {
+    event.preventDefault();
+
+
+    var city = $("#cityInput").val();
+    var cityHistory = [];
+
+    // cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || []; 
+    // cityHistory.push("cityHistory", JSON.stringify(cityHistory));
+
+    // displayWeather()
+    // display5day()
+})
+
+
+
+
+
+// CURRENTLY WORKING ON LINKING CITY SEARCH TO ONE WEATHER DATA! AS OF 6/21/20 @ 10PM
+
+
+
+
+
 $.ajax({
     url: weatherUrl,
     method: "GET"
@@ -68,6 +95,7 @@ $.ajax({
     })
 
 
+
 $.ajax({
     url: fiveDayQuery,
     method: "GET"
@@ -100,17 +128,7 @@ $.ajax({
 
 
 
-// On click event listener for search button
-$("#citySearch").on("click", function () {
-    var city = $("#cityInput").val();
-    var cityHistory = [];
 
-    cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || []; 
-    cityHistory.push("cityHistory", JSON.stringify(cityHistory));
-
-    displayWeather()
-    display5day()
-})
 
 //On click event listener for city buttons
 // $(document).on("click", ".city-btn", function () {
