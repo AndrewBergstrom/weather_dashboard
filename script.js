@@ -1,10 +1,9 @@
 var APIKey = "4af87ee91531ff09b1ce9e3392587b3a"
 
-// var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=seattle&appid=" + APIKey
-
 var fiveDayQuery = "https://api.openweathermap.org/data/2.5/forecast?q=seattle&appid=" + APIKey
 
-// var startDate = moment().format('M/DD/YYYY');  // Current Date
+var startDate = moment().format('M/DD/YYYY');  // Current Date
+console.log(startDate)
 
 // 5 day forcast variables
 var dayOne = $("#dayOne")
@@ -70,7 +69,7 @@ function cityWeather() {
             var myLon = response.coord.lon;
             getUVindex(myLat, myLon);
 
-
+            if ()
 
             // within this fuction we are using the ajax method to grab our UV-Index info. Then we use our console.log to walk the tree of our data from uv index to find the value of lat and lon. This is our displayed UV-Index
             function getUVindex(lat, log) {
