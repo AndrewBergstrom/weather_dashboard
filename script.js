@@ -1,9 +1,10 @@
 var APIKey = "4af87ee91531ff09b1ce9e3392587b3a"
-var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=seattle&appid=" + APIKey
+
+// var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=seattle&appid=" + APIKey
 
 var fiveDayQuery = "https://api.openweathermap.org/data/2.5/forecast?q=seattle&appid=" + APIKey
 
-var startDate = moment().format('M/DD/YYYY');  // Current Date
+// var startDate = moment().format('M/DD/YYYY');  // Current Date
 
 // 5 day forcast variables
 var dayOne = $("#dayOne")
@@ -11,44 +12,30 @@ var dayTwo = $("#dayTwo")
 var dayThree = $("#dayThree")
 var dayFour = $("#dayFour")
 var dayFive = $("#dayFive")
+var city = "Seattle"
 
-
-
-
-
-
-
-
-
-// CURRENTLY WORKING ON LINKING CITY SEARCH TO ONE WEATHER DATA! AS OF 6/21/20 @ 10PM
-
+cityWeather()
 // On click event listener for search button
 $("#citySearch").on("click", function (event) {
+
     event.preventDefault();
 
-
-    var city = $("#cityInput").val();
+    city = $("#cityInput").val();
+    console.log(city)
     var cityHistory = [];
+    cityWeather()
 
-    // cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || []; 
-    // cityHistory.push("cityHistory", JSON.stringify(cityHistory));
-
-    // displayWeather()
-    // display5day()
-    currentCity(city)
 })
 
 
-
-
-function currentCity(city) {}
+function cityWeather() {
     $.ajax({
-        url: weatherUrl,
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey,
         method: "GET"
+
     })
         .then(function (response) {
-            // Log the queryURL
-            console.log(weatherUrl)
+
             // Log the resulting object
             console.log(response)
 
@@ -63,6 +50,8 @@ function currentCity(city) {}
             $(".tempC").html("Temp (C): " + tempC.toFixed())
             $(".humidity").text("Humidity: " + response.main.humidity);
             $(".wind").text("Wind: " + response.wind.speed);
+
+
 
             // using iconImg and dynamically creating and image element, then appending it to the weather-icon classs
             var iconImg = $("<img id = 'icon'>")
@@ -97,31 +86,32 @@ function currentCity(city) {}
 
         })
 
+}
 
 
-    $.ajax({
-        url: fiveDayQuery,
-        method: "GET"
+$.ajax({
+    url: fiveDayQuery,
+    method: "GET"
 
-    }).then(function (fiveDayRes) {
-        // log 5 day query
-        console.log(fiveDayQuery)
+}).then(function (fiveDayRes) {
+    // log 5 day query
+    console.log(fiveDayQuery)
 
-        console.log("five day", fiveDayRes.list)
+    console.log("five day", fiveDayRes.list)
 
-        var fiveDayOnly = []
+    var fiveDayOnly = []
 
-        for (var i = 0; i < fiveDayRes.list.length; i++) {
+    for (var i = 0; i < fiveDayRes.list.length; i++) {
 
-            if (fiveDayRes.list[i].dt_txt.indexOf("12" !== -1)) {
+        if (fiveDayRes.list[i].dt_txt.indexOf("12" !== -1)) {
 
-                console.log(fiveDayRes.list[i].dt_txt.indexOf("12"))
+            console.log(fiveDayRes.list[i].dt_txt.indexOf("12"))
 
-                fiveDayOnly.push(fiveDayRes.list[i])
+            fiveDayOnly.push(fiveDayRes.list[i])
 
-            }
         }
-    })
+    }
+})
 
 
 
@@ -131,6 +121,27 @@ function currentCity(city) {}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || []; 
+    // cityHistory.push("cityHistory", JSON.stringify(cityHistory));
+
+    // displayWeather()
+    // display5day()
 
 //On click event listener for city buttons
 // $(document).on("click", ".city-btn", function () {
