@@ -57,7 +57,7 @@ function cityWeather() {
 
                         if (data.value < 5) {
                             $(".uvIndex").addClass("ok")
-                        } else if (data.value > 8) {
+                        } if (data.value > 8) {
                             $(".uvIndex").addClass("severe")
                         } else {
                             $(".uvIndex").addClass("moderate")
@@ -85,11 +85,11 @@ function cityWeather() {
         
                 var tempF = (fiveDayRes.list[i].main.temp - 273.15) * 1.80 + 32;
                
-                $("#card0Date").text(moment().format("MMM Do YY"));
-                $("#cardOneDate").text(moment().format("MMM Do YY"));
-                $("#cardTwoDate").text(moment().format("MMM Do YY"));
-                $("#cardThreeDate").text(moment().format("MMM Do YY"));
-                $("#cardFourDate").text(moment().format("MMM Do YY"));
+                $("#card0Date").text(moment().add(1, 'days').format("MMM Do YY"));
+                $("#cardOneDate").text(moment().add(2,'days').format("MMM Do YY"));
+                $("#cardTwoDate").text(moment().add(3, 'days').format("MMM Do YY"));
+                $("#cardThreeDate").text(moment().add(4, 'days').format("MMM Do YY"));
+                $("#cardFourDate").text(moment().add(5, 'days').format("MMM Do YY"));
                
                 $("#card0Temp").text("Temp (F): " + tempF.toFixed());
                 $("#cardOneTemp").text("Temp (F): " + tempF.toFixed());
