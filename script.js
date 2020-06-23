@@ -23,7 +23,7 @@ function cityWeather() {
 
             // Here we are grabbing all the info for our current city weather deatails and displaying them on our dashboard.
            
-            $(".city").html("<h2>" + response.name + " Weather Details</h2>");
+            $(".city").html("<h4>" + response.name + ` Weather Details ${startDate}</h4>`);
             $(".temp").text("Temp (F): " + tempF.toFixed());
             $(".tempC").html("Temp (C): " + tempC.toFixed())
             $(".humidity").text("Humidity: " + response.main.humidity);
