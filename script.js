@@ -90,7 +90,11 @@ function cityWeather() {
         
                 var tempF = (fiveDayRes.list[i].main.temp - 273.15) * 1.80 + 32;
                
-        
+                $("#card0Date").text(moment().format("MMM Do YY"));
+                $("#cardOneDate").text(moment().format("MMM Do YY"));
+                $("#cardTwoDate").text(moment().format("MMM Do YY"));
+                $("#cardThreeDate").text(moment().format("MMM Do YY"));
+                $("#cardFourDate").text(moment().format("MMM Do YY"));
                
                 $("#card0Temp").text("Temp (F): " + tempF.toFixed());
                 $("#cardOneTemp").text("Temp (F): " + tempF.toFixed());
