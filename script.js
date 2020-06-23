@@ -3,13 +3,7 @@ var APIKey = "4af87ee91531ff09b1ce9e3392587b3a"
 var startDate = moment().format('M/DD/YYYY');  // Current Date
 console.log(startDate)
 
-// 5 day forcast variables
-var dayOne = $("#dayOne")
-var dayTwo = $("#dayTwo")
-var dayThree = $("#dayThree")
-var dayFour = $("#dayFour")
-var dayFive = $("#dayFive")
-var city = "Seattle"
+var city = "Captain Cook"
 
 cityWeather()
 // On click event listener for search button
@@ -28,6 +22,7 @@ function cityWeather() {
             var tempC = (response.main.temp - 273.15);
 
             // Here we are grabbing all the info for our current city weather deatails and displaying them on our dashboard.
+           
             $(".city").html("<h2>" + response.name + " Weather Details</h2>");
             $(".temp").text("Temp (F): " + tempF.toFixed());
             $(".tempC").html("Temp (C): " + tempC.toFixed())
@@ -61,11 +56,11 @@ function cityWeather() {
                         $(".uvIndex").text(`UV index: ${data.value}`);
 
                         if (data.value < 5) {
-                            $(".uvIndex").addClass("Ok")
+                            $(".uvIndex").addClass("ok")
                         } else if (data.value > 8) {
-                            $(".uvIndex").addClass("Severe")
+                            $(".uvIndex").addClass("severe")
                         } else {
-                            $(".uvIndex").addClass("Moderate")
+                            $(".uvIndex").addClass("moderate")
                         }
 
                     }

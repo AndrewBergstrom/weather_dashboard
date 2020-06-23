@@ -14,3 +14,18 @@
     display: flex;
     justify-content: center;
 }
+
+.ok {
+    border-style: solid;
+    border-color: yellow;
+}
+
+.moderate {
+    border-style: solid;
+    border-color: gray;
+}
+
+.severe {
+    border-style: solid;
+    border-color: red;
+}
