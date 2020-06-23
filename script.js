@@ -1,7 +1,5 @@
 var APIKey = "4af87ee91531ff09b1ce9e3392587b3a"
 
-var fiveDayQuery = "https://api.openweathermap.org/data/2.5/forecast?q=seattle&appid=" + APIKey
-
 var startDate = moment().format('M/DD/YYYY');  // Current Date
 console.log(startDate)
 
@@ -22,8 +20,14 @@ $("#citySearch").on("click", function (event) {
     city = $("#cityInput").val();
     console.log(city)
     var cityHistory = [];
+
+    cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
+    cityHistory.push(city);
+    localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
+
     cityWeather()
 
+   
 })
 
 
@@ -69,7 +73,7 @@ function cityWeather() {
             var myLon = response.coord.lon;
             getUVindex(myLat, myLon);
 
-            if ()
+            // if ()
 
             // within this fuction we are using the ajax method to grab our UV-Index info. Then we use our console.log to walk the tree of our data from uv index to find the value of lat and lon. This is our displayed UV-Index
             function getUVindex(lat, log) {
@@ -89,82 +93,32 @@ function cityWeather() {
 
 
 $.ajax({
-    url: fiveDayQuery,
+    url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey,
     method: "GET"
 
 }).then(function (fiveDayRes) {
-    // log 5 day query
-    console.log(fiveDayQuery)
+
+    console.log("5 day no list", fiveDayRes)
 
     console.log("five day", fiveDayRes.list)
 
     var fiveDayOnly = []
 
+    // var tempF = (fiveDayRes.list[i].main.temp - 273.15) * 1.80 + 32;
+    // $(".card-body").text("Temp (F): " + tempF.toFixed());
+    // $(".card-body").text("Humidity: "+fiveDayRes.list[i].main.humidity);
+
+
     for (var i = 0; i < fiveDayRes.list.length; i++) {
 
+
         if (fiveDayRes.list[i].dt_txt.indexOf("12" !== -1)) {
-
             console.log(fiveDayRes.list[i].dt_txt.indexOf("12"))
-
             fiveDayOnly.push(fiveDayRes.list[i])
 
+
         }
+
     }
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || []; 
-    // cityHistory.push("cityHistory", JSON.stringify(cityHistory));
-
-    // displayWeather()
-    // display5day()
-
-//On click event listener for city buttons
-// $(document).on("click", ".city-btn", function () {
-//     city = $(this).attr("data-name");
-//     displayWeather()
-//     display5day()
-// })
-
-//On click event listener for clear search results button
-// $("#clear-search").on("click", function () {
-//     localStorage.clear("cities")
-//     listOfCities = []
-//     $(".buttons-view").empty()
-//     //refresh page
-//     location.reload()
-// })
-
-   //To run when document loads (if/else statement that will pull from local storage only if the value is not "null")
-// $(document).ready(function() {
-//     if(localStorage.getItem("cities") !== null) {
-//         var savedCity = localStorage.getItem("cities");
-//         var pushCities = JSON.parse(savedCity)
-//         listOfCities = listOfCities.concat(pushCities)
-//     }
-
-//     renderButtons()
-//     })

@@ -9,3 +9,8 @@
     justify-content: flex-end;
     
 }
+
+#fiveDayfc{
+    display: flex;
+    justify-content: center;
+}
