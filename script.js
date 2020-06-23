@@ -13,22 +13,6 @@ var city = "Seattle"
 
 cityWeather()
 // On click event listener for search button
-$("#citySearch").on("click", function (event) {
-
-    event.preventDefault();
-
-    city = $("#cityInput").val();
-    console.log(city)
-    var cityHistory = [];
-
-    cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
-    cityHistory.push(city);
-    localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
-
-    cityWeather()
-
-   
-})
 
 
 function cityWeather() {
@@ -38,14 +22,10 @@ function cityWeather() {
 
     })
         .then(function (response) {
-
-            // Log the resulting object
             console.log(response)
-
             // converting kelvin to farenheit and adding celcius onto the dashboard.
             var tempF = (response.main.temp - 273.15) * 1.80 + 32;
             var tempC = (response.main.temp - 273.15);
-
 
             // Here we are grabbing all the info for our current city weather deatails and displaying them on our dashboard.
             $(".city").html("<h2>" + response.name + " Weather Details</h2>");
@@ -53,8 +33,6 @@ function cityWeather() {
             $(".tempC").html("Temp (C): " + tempC.toFixed())
             $(".humidity").text("Humidity: " + response.main.humidity);
             $(".wind").text("Wind: " + response.wind.speed);
-
-
 
             // using iconImg and dynamically creating and image element, then appending it to the weather-icon classs
             var iconImg = $("<img id = 'icon'>")
@@ -73,8 +51,6 @@ function cityWeather() {
             var myLon = response.coord.lon;
             getUVindex(myLat, myLon);
 
-            // if ()
-
             // within this fuction we are using the ajax method to grab our UV-Index info. Then we use our console.log to walk the tree of our data from uv index to find the value of lat and lon. This is our displayed UV-Index
             function getUVindex(lat, log) {
                 $.ajax({
@@ -83,42 +59,75 @@ function cityWeather() {
                     success: function (data) {
                         console.log("data from uv index: ", data);
                         $(".uvIndex").text(`UV index: ${data.value}`);
+
+                        if (data.value < 5) {
+                            $(".uvIndex").addClass("Ok")
+                        } else if (data.value > 8) {
+                            $(".uvIndex").addClass("Severe")
+                        } else {
+                            $(".uvIndex").addClass("Moderate")
+                        }
+
                     }
                 })
             }
 
         })
-
+        $.ajax({
+            url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey,
+            method: "GET"
+        
+        }).then(function (fiveDayRes) {
+            console.log("5 day no list", fiveDayRes)
+            console.log("five day", fiveDayRes.list)
+            var fiveDayOnly = []
+        
+             
+            // $(".card-body").text("Humidity: "+fiveDayRes.list[i].main.humidity);
+        
+        
+            for (var i = 0; i < fiveDayRes.list.length; i++) {
+        
+                var tempF = (fiveDayRes.list[i].main.temp - 273.15) * 1.80 + 32;
+               
+        
+               
+                $("#card0Temp").text("Temp (F): " + tempF.toFixed());
+                $("#cardOneTemp").text("Temp (F): " + tempF.toFixed());
+                $("#cardTwoTemp").text("Temp (F): " + tempF.toFixed());
+                $("#cardThreeTemp").text("Temp (F): " + tempF.toFixed());
+                $("#cardFourTemp").text("Temp (F): " + tempF.toFixed());
+        
+                $("#card0Humidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
+                $("#cardOneHumidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
+                $("#cardTwoHumidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
+                $("#cardThreeHumidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
+                $("#cardFourHumidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
+        
+        
+        
+                if (fiveDayRes.list[i].dt_txt.indexOf("12" !== -1)) {
+                    console.log(fiveDayRes.list[i].dt_txt.indexOf("12"))
+                    fiveDayOnly.push(fiveDayRes.list[i])
+                }
+            }
+            
+        })
 }
 
 
-$.ajax({
-    url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey,
-    method: "GET"
-
-}).then(function (fiveDayRes) {
-
-    console.log("5 day no list", fiveDayRes)
-
-    console.log("five day", fiveDayRes.list)
-
-    var fiveDayOnly = []
-
-    // var tempF = (fiveDayRes.list[i].main.temp - 273.15) * 1.80 + 32;
-    // $(".card-body").text("Temp (F): " + tempF.toFixed());
-    // $(".card-body").text("Humidity: "+fiveDayRes.list[i].main.humidity);
 
 
-    for (var i = 0; i < fiveDayRes.list.length; i++) {
+$("#citySearch").on("click", function (event) {
+    event.preventDefault();
 
+    city = $("#cityInput").val();
+    console.log(city)
+    var cityHistory = [];
 
-        if (fiveDayRes.list[i].dt_txt.indexOf("12" !== -1)) {
-            console.log(fiveDayRes.list[i].dt_txt.indexOf("12"))
-            fiveDayOnly.push(fiveDayRes.list[i])
+    cityHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
+    cityHistory.push(city);
+    localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
 
-
-        }
-
-    }
+    cityWeather()
 })
-
