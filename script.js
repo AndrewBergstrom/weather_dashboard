@@ -85,17 +85,17 @@ function cityWeather() {
         
                 var tempF = (fiveDayRes.list[i].main.temp - 273.15) * 1.80 + 32;
                
-                $("#card0Date").text(moment().add(1, 'days').format("MMM Do YY"));
-                $("#cardOneDate").text(moment().add(2,'days').format("MMM Do YY"));
-                $("#cardTwoDate").text(moment().add(3, 'days').format("MMM Do YY"));
-                $("#cardThreeDate").text(moment().add(4, 'days').format("MMM Do YY"));
-                $("#cardFourDate").text(moment().add(5, 'days').format("MMM Do YY"));
+                $("#card0Date").text(moment().add(1, 'days').format("MMM Do "));
+                $("#cardOneDate").text(moment().add(2,'days').format("MMM Do "));
+                $("#cardTwoDate").text(moment().add(3, 'days').format("MMM Do "));
+                $("#cardThreeDate").text(moment().add(4, 'days').format("MMM Do "));
+                $("#cardFourDate").text(moment().add(5, 'days').format("MMM Do "));
                
-                $("#card0Temp").text("Temp (F): " + tempF.toFixed());
-                $("#cardOneTemp").text("Temp (F): " + tempF.toFixed());
-                $("#cardTwoTemp").text("Temp (F): " + tempF.toFixed());
-                $("#cardThreeTemp").text("Temp (F): " + tempF.toFixed());
-                $("#cardFourTemp").text("Temp (F): " + tempF.toFixed());
+                $("#card0Temp").text("Temperature: " + tempF.toFixed());
+                $("#cardOneTemp").text("Temperature: " + tempF.toFixed());
+                $("#cardTwoTemp").text("Temperature: " + tempF.toFixed());
+                $("#cardThreeTemp").text("Temperature: " + tempF.toFixed());
+                $("#cardFourTemp").text("Temperature: " + tempF.toFixed());
         
                 $("#card0Humidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
                 $("#cardOneHumidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
