@@ -6,8 +6,6 @@ console.log(startDate)
 var city = "Captain Cook"
 
 cityWeather()
-// On click event listener for search button
-
 
 function cityWeather() {
     $.ajax({
@@ -73,13 +71,8 @@ function cityWeather() {
         method: "GET"
 
     }).then(function (fiveDayRes) {
-        console.log("5 day no list", fiveDayRes)
-        console.log("five day", fiveDayRes.list)
-        var fiveDayOnly = []
-
-
-        // $(".card-body").text("Humidity: "+fiveDayRes.list[i].main.humidity);
-
+       
+     var fiveDayOnly = []
 
         for (var i = 0; i < fiveDayRes.list.length; i++) {
             if (fiveDayRes.list[i].dt_txt.indexOf("12:00:00") !== -1) {
@@ -107,8 +100,6 @@ function cityWeather() {
 
     })
 }
-
-
 
 
 $("#citySearch").on("click", function (event) {
