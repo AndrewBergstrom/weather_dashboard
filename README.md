@@ -19,8 +19,13 @@ I ran into a couple problems with this project.
 
 Overall a challenging exercise but really good practice using API's.
 
+Image below is showing the weather dashboard, with uv index highlighted red indicating that it is at a dangerous level. You can see the basic layout here. 
 
 ![](images/WeatherDashboard.png)
+
+In this next image you can see the city search history in from my input field.
+
+![](images/searchBarDropDown.png)
 
 
 
