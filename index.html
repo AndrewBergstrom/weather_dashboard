@@ -28,9 +28,7 @@
 
       <div class="col-8 pt-4" id="date-display">
         <!-- city, temp, humidity, wind speed, and uv index -->
-        <!-- Where retrieved data will be placed -->
-        <!-- when uv index is viewed, a color indicates if conditions are favorable, moderate, or severe -->
-        <!-- date -->
+        <!-- when uv index is viewed, a color indicates if conditions are favorable, moderate, or severe  || STILL WORKING ON THIS -->
         <div class="city"></div>
         <div class="row">
           <div class="col-md-2 weather-icon">
@@ -43,7 +41,7 @@
               <li class="tempC"></li>
               <li class="humidity"></li>
               <li class="wind"></li>
-              <li class="uvIndex" ><span><button id="uvIndex"></button></span></li>
+              <li class="uvIndex"><span><button id="uvIndex"></button></span></li>
             </ul>
           </div>
 
@@ -59,72 +57,14 @@
       <div class="col-md-4">
         <h2>5 Day Forecast: </h2>
       </div>
-      
+
       <div class="card-deck">
-
-        <div class="card bg-light text-black" id="cardZero">
-          <div class="card-body">
-            <h4 class="card-title" id="card0Date">Date</h5>
-              <img id="card0Img" src="" alt="">
-              <p class="card-text" id="card0Temp">Temperature</p>
-              <p class="card-text" id="card0Humidity">Humidity</p>
-          </div>
-        </div>
-
-        <div class="card bg-light text-black"id="cardOne">
-          <div class="card-body">
-            <h4 class="card-title" id="cardOneDate">Date</h5>
-              <img id="cardOneImg" src="" alt="">
-              <p class="card-text" id="cardOneTemp">Temperature</p>
-              <p class="card-text" id="cardOneHumidity">Humidity</p>
-          </div>
-        </div>
-
-        <div class="card bg-light text-black"id="cardTwo">
-          <div class="card-body">
-            <h4 class="card-title" id="cardTwoDate">Date</h5>
-              <img id="cardTwoImg" src="" alt="">
-              <p class="card-text" id="cardTwoTemp">Temperature</p>
-              <p class="card-text" id="cardTwoHumidity">Humidity</p>
-          </div>
-        </div>
-
-        <div class="card bg-light text-black"id="cardThree">
-          <div class="card-body">
-            <h4 class="card-title" id="cardThreeDate">Date</h5>
-              <img id="cardThreeImg" src="" alt="">
-              <p class="card-text" id="cardThreeTemp">Temperature</p>
-              <p class="card-text" id="cardThreeHumidity">Humidity</p>
-          </div>
-        </div>
-
-        <div class="card bg-light text-black"id="cardFour">
-          <div class="card-body">
-            <h4 class="card-title" id="cardFourDate">Date</h5>
-              <img id="cardFourImg" src="" alt="">
-              <p class="card-text" id="cardFourTemp">Temperature</p>
-              <p class="card-text" id="cardFourHumidity">Humidity</p>
-          </div>
-        </div>
       </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-      <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

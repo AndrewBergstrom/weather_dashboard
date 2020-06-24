@@ -22,7 +22,7 @@ function cityWeather() {
             var tempC = (response.main.temp - 273.15);
 
             // Here we are grabbing all the info for our current city weather deatails and displaying them on our dashboard.
-           
+
             $(".city").html("<h4>" + response.name + ` Weather Details ${startDate}</h4>`);
             $(".temp").text("Temp (F): " + tempF.toFixed());
             $(".tempC").html("Temp (C): " + tempC.toFixed())
@@ -68,50 +68,44 @@ function cityWeather() {
             }
 
         })
-        $.ajax({
-            url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey,
-            method: "GET"
-        
-        }).then(function (fiveDayRes) {
-            console.log("5 day no list", fiveDayRes)
-            console.log("five day", fiveDayRes.list)
-            var fiveDayOnly = []
-        
-             
-            // $(".card-body").text("Humidity: "+fiveDayRes.list[i].main.humidity);
-        
-        
-            for (var i = 0; i < fiveDayRes.list.length; i++) {
-        
+    $.ajax({
+        url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=imperial",
+        method: "GET"
+
+    }).then(function (fiveDayRes) {
+        console.log("5 day no list", fiveDayRes)
+        console.log("five day", fiveDayRes.list)
+        var fiveDayOnly = []
+
+
+        // $(".card-body").text("Humidity: "+fiveDayRes.list[i].main.humidity);
+
+
+        for (var i = 0; i < fiveDayRes.list.length; i++) {
+            if (fiveDayRes.list[i].dt_txt.indexOf("12:00:00") !== -1) {
+                console.log(fiveDayRes.list[i])
+                fiveDayOnly.push(fiveDayRes.list[i])
+
                 var tempF = (fiveDayRes.list[i].main.temp - 273.15) * 1.80 + 32;
-               
-                $("#card0Date").text(moment().add(1, 'days').format("MMM Do "));
-                $("#cardOneDate").text(moment().add(2,'days').format("MMM Do "));
-                $("#cardTwoDate").text(moment().add(3, 'days').format("MMM Do "));
-                $("#cardThreeDate").text(moment().add(4, 'days').format("MMM Do "));
-                $("#cardFourDate").text(moment().add(5, 'days').format("MMM Do "));
-               
-                $("#card0Temp").text("Temperature: " + tempF.toFixed());
-                $("#cardOneTemp").text("Temperature: " + tempF.toFixed());
-                $("#cardTwoTemp").text("Temperature: " + tempF.toFixed());
-                $("#cardThreeTemp").text("Temperature: " + tempF.toFixed());
-                $("#cardFourTemp").text("Temperature: " + tempF.toFixed());
-        
-                $("#card0Humidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
-                $("#cardOneHumidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
-                $("#cardTwoHumidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
-                $("#cardThreeHumidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
-                $("#cardFourHumidity").text("Humidity: " + fiveDayRes.list[i].main.humidity);
-        
-        
-        
-                if (fiveDayRes.list[i].dt_txt.indexOf("12" !== -1)) {
-                    console.log(fiveDayRes.list[i].dt_txt.indexOf("12"))
-                    fiveDayOnly.push(fiveDayRes.list[i])
-                }
+                var myTemp = fiveDayRes.list[i].dt_txt.split(" ")
+
+                var myCard = `<div class="card bg-light text-black" id="cardZero">
+                <div class="card-body">
+                  <h5 class="card-title" id="card0Date">${myTemp[0]}</h5>
+                    <img id="card0Img" src="" alt="">
+                    <p class="card-text" id="card0Temp">Temp : ${fiveDayRes.list[i].main.temp.toFixed()}</p>
+                    <p class="card-text" id="card0Humidity">Humidity : ${fiveDayRes.list[i].main.humidity}</p>
+                </div>
+              </div>`
+
+              $(".card-deck").append(myCard)
+
             }
-            
-        })
+           
+        }
+   
+
+    })
 }
 
 
@@ -119,8 +113,9 @@ function cityWeather() {
 
 $("#citySearch").on("click", function (event) {
     event.preventDefault();
-
+    $(".card-deck").text("")
     city = $("#cityInput").val();
+    $("#cityInput").val("")
     console.log(city)
     var cityHistory = [];
 
